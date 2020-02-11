@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnionFind", "UnionFind\UnionFind.csproj", "{A38F9F0E-1148-467D-AC1F-B118B0967240}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorting", "Sorting\Sorting.csproj", "{5EE68C3C-35AE-4C79-8B7A-B63C3F5CDB39}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A38F9F0E-1148-467D-AC1F-B118B0967240}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A38F9F0E-1148-467D-AC1F-B118B0967240}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A38F9F0E-1148-467D-AC1F-B118B0967240}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A38F9F0E-1148-467D-AC1F-B118B0967240}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EE68C3C-35AE-4C79-8B7A-B63C3F5CDB39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EE68C3C-35AE-4C79-8B7A-B63C3F5CDB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EE68C3C-35AE-4C79-8B7A-B63C3F5CDB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EE68C3C-35AE-4C79-8B7A-B63C3F5CDB39}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
