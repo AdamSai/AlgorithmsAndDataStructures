@@ -5,18 +5,18 @@ namespace Sorting
     public class Shell
     {
         /// <summary>
-        /// Sorts an array much like insertion, but instead of swapping neighbors, it is swapping with with
-        /// elements with a decreasingly gap size. We start with the biggest gap possible, then slowly reduce
+        /// Sorts an array much like insertion, but instead of swapping neighbors, it is swapping  
+        /// elements with a gap size that is decreasing. We start with the biggest gap possible, then reduce by a multiplier
         /// until all elements have been sorted.
         /// </summary>
         /// <param name="a">An array of objects implementing the IComparable interface</param>
         public static void Sort(IComparable[] a)
         {
-            var N = a.Length;
+            Console.WriteLine("Sorting..");
+            int N = a.Length;
             // h is the gap between the objects we are comparing
-            var h = 1;
-            const int gapMultiplier = 3;
-            while (h < N / gapMultiplier) h = gapMultiplier * h + 1; // Calculate the biggest possible gap size
+            int h = 1;
+            while (h < N / 3) h = 3 * h + 1; // Calculate the biggest possible gap size
             while (h >= 1)
             {
                 // h sort the array
@@ -24,13 +24,13 @@ namespace Sorting
                 {
                     // if j is greater than the gap and value at j is lesser than it's index minus the gap, then execute
                     // and decrement by h (gap)
-                    for (int j = i ; j >= h && Less(a[j], a[j-h]); j -= h)
+                    for (int j = i; j >= h && Less(a[j], a[j - h]); j -= h)
                     {
-                        Exch(a, j, j-h);
+                        Exch(a, j, j - h);
                     }
-                    // Adjust the gap size every time we increment i
-                    h /= gapMultiplier;
                 }
+                // Adjust the gap size every time we increment i
+                h /= 3;
             }
         }
 
@@ -44,7 +44,7 @@ namespace Sorting
         {
             return v.CompareTo(w) < 0;
         }
-        
+
         /// <summary>
         /// Swap index of values at position i and j
         /// </summary>
@@ -62,24 +62,26 @@ namespace Sorting
         /// Prints the contents of an array
         /// </summary>
         /// <param name="a">The array of the contents that should be printed</param>
-        internal static void Show(IComparable[] a)
+        public static void Show(IComparable[] a)
         {
             foreach (var t in a)
             {
                 Console.Write(t + " ");
             }
         }
+
         /// <summary>
         /// Check if the array is sorted
         /// </summary>
         /// <param name="a">The array which you want to check if it is sorted</param>
         /// <returns>Return <c>true</c> if the array is sorted otherwise <c>false</c></returns>
-        internal static bool IsSorted(IComparable[] a)
+        public static bool IsSorted(IComparable[] a)
         {
             for (var i = 1; i < a.Length; i++)
             {
                 if (Less(a[i], a[i - 1])) return false;
             }
+
             return true;
         }
     }

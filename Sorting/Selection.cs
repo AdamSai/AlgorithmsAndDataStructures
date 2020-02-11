@@ -7,7 +7,7 @@ namespace Sorting
     {
         /// <summary>
         /// Sorts an array by setting the current value as the min value, then iterating through the array
-        /// and comparing if any any numbers are smaller than the min value. If a smaller number is found
+        /// and comparing if any numbers are smaller than the min value. If a smaller number is found
         /// it is moved to the current position.
         /// </summary>
         /// <param name="a">An array of objects implementing the IComparable interface</param>

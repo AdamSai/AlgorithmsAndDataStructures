@@ -53,7 +53,7 @@ namespace Sorting
         /// Prints the contents of an array
         /// </summary>
         /// <param name="a">The array of the contents that should be printed</param>
-        internal static void Show(IComparable[] a)
+        public static void Show(IComparable[] a)
         {
             foreach (var t in a)
             {

@@ -4,6 +4,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnionFind", "UnionFind\Unio
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sorting", "Sorting\Sorting.csproj", "{5EE68C3C-35AE-4C79-8B7A-B63C3F5CDB39}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shakespeare", "Shakespeare\Shakespeare.csproj", "{F468E7B8-EDE7-44AD-B5D7-7312FA791C92}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +20,9 @@ Global
 		{5EE68C3C-35AE-4C79-8B7A-B63C3F5CDB39}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5EE68C3C-35AE-4C79-8B7A-B63C3F5CDB39}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5EE68C3C-35AE-4C79-8B7A-B63C3F5CDB39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F468E7B8-EDE7-44AD-B5D7-7312FA791C92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F468E7B8-EDE7-44AD-B5D7-7312FA791C92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F468E7B8-EDE7-44AD-B5D7-7312FA791C92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F468E7B8-EDE7-44AD-B5D7-7312FA791C92}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
