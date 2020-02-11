@@ -3,25 +3,26 @@ using System.Diagnostics;
 
 namespace Sorting
 {
-    /// <summary>
-    /// This class is used for Selection sorting.
-    /// </summary>
     public class Selection
     {
         /// <summary>
-        /// Iterates through the array and checks if the current j value is smaller than the current i value 
-        /// if it is, switch the positions of the two. This ensures that the array is always sorted on the left side.
+        /// Sorts an array by setting the current value as the min value, then iterating through the array
+        /// and comparing if any any numbers are smaller than the min value. If a smaller number is found
+        /// it is moved to the current position.
         /// </summary>
         /// <param name="a">An array of objects implementing the IComparable interface</param>
         public static void Sort(IComparable[] a)
         {
             var N = a.Length;
-            for (var i = 1; i < N; i++)
+            for (var i = 0; i < N; i++)
             {
-                for (var j = i ; j > 0 && Less(a[j], a[j - 1]); j--)
+                // Find the smallest value in the array and replace a[i] with said value
+                var min = i;
+                for (var j = i + 1 ; j < N; j++)
                 {
-                    Exch(a, j, j-1);
+                    if (Less(a[j], a[min])) min = j;
                 }
+                Exch(a, i, min);
             }
         }
 
@@ -74,6 +75,6 @@ namespace Sorting
             return true;
         }
         
-   
+ 
     }
 }

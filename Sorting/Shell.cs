@@ -1,26 +1,35 @@
 using System;
-using System.Diagnostics;
 
 namespace Sorting
 {
-    /// <summary>
-    /// This class is used for Selection sorting.
-    /// </summary>
-    public class Insertion
+    public class Shell
     {
         /// <summary>
-        /// Iterates through the array and checks if the current j value is smaller than the current i value 
-        /// if it is, switch the positions of the two. This ensures that the array is always sorted on the left side.
+        /// Sorts an array much like insertion, but instead of swapping neighbors, it is swapping with with
+        /// elements with a decreasingly gap size. We start with the biggest gap possible, then slowly reduce
+        /// until all elements have been sorted.
         /// </summary>
         /// <param name="a">An array of objects implementing the IComparable interface</param>
         public static void Sort(IComparable[] a)
         {
             var N = a.Length;
-            for (var i = 1; i < N; i++)
+            // h is the gap between the objects we are comparing
+            var h = 1;
+            const int gapMultiplier = 3;
+            while (h < N / gapMultiplier) h = gapMultiplier * h + 1; // Calculate the biggest possible gap size
+            while (h >= 1)
             {
-                for (var j = i ; j > 0 && Less(a[j], a[j - 1]); j--)
+                // h sort the array
+                for (int i = h; i < N; i++)
                 {
-                    Exch(a, j, j-1);
+                    // if j is greater than the gap and value at j is lesser than it's index minus the gap, then execute
+                    // and decrement by h (gap)
+                    for (int j = i ; j >= h && Less(a[j], a[j-h]); j -= h)
+                    {
+                        Exch(a, j, j-h);
+                    }
+                    // Adjust the gap size every time we increment i
+                    h /= gapMultiplier;
                 }
             }
         }
@@ -73,7 +82,5 @@ namespace Sorting
             }
             return true;
         }
-        
-   
     }
 }
