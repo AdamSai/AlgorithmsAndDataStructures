@@ -15,7 +15,7 @@ namespace Shakespeare
             var stopwatch = Stopwatch.StartNew();
             Shell.Sort(tp.Words);
             stopwatch.Stop();
-            for (int i = 0; i < 100 ; i++)
+            for (var i = 0; i < 50 ; i++)
             {
                 Console.WriteLine(i + " " + tp.Words[i]);
             }
