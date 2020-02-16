@@ -11,13 +11,14 @@ namespace Shakespeare
         static void Main(string[] args)
         {
             var tp = new TextProcessor();
-            tp.ProcessTextFile("/home/adam/Documents/shakespeare-complete-works.txt");
+            var regexPattern = @"[a-zA-ZæøåÆØÅ]+'?[a-zA-ZæøåÆØÅ]*";
+            tp.ProcessTextFile("/home/adam/Documents/shakespeare-complete-works.txt", regexPattern);
             var stopwatch = Stopwatch.StartNew();
-            Shell.Sort(tp.Words);
+            Shell.Sort(tp.ProcessedStrings);
             stopwatch.Stop();
             for (var i = 0; i < 50 ; i++)
             {
-                Console.WriteLine(i + " " + tp.Words[i]);
+                Console.WriteLine(i + " " + tp.ProcessedStrings[i]);
             }
             Console.WriteLine($"Sorted in {stopwatch.Elapsed}");
         }
