@@ -10,7 +10,6 @@ namespace UnionFind
     {
         private int count;
         private int[] pointSets;
-        private IEnumerator<string> _enumerator;
         
         public QuickUnion(int count)
         {
@@ -60,11 +59,13 @@ namespace UnionFind
 
         public override string ToString()
         {
-            var result = "";
+            var result = "[ ";
             for (var i = 0; i < pointSets.Length; i++)
             {
-                result += pointSets[i].ToString();
+                result += $"'{pointSets[i].ToString()}', ";
             }
+
+            result += "]";
 
             return result;
         }
@@ -72,6 +73,7 @@ namespace UnionFind
         #region Read text from file
         
         private int numberOfLinesInFile;
+        private IEnumerator<string> _enumerator;
 
         // Used to read from the text file from the assignment
         public QuickUnion(string path)
@@ -107,11 +109,11 @@ namespace UnionFind
                 Union(p, q);
 
 
-                var percentageDone = ((float) i / numberOfLinesInFile) * 100;
-                var consoleString =
-                    $"Connected points {i} of {numberOfLinesInFile}. {percentageDone:N2}% done";
-                // Move the console cursor to the start and replace the line
-                Console.Write("\r{0}", consoleString);
+                // var percentageDone = ((float) i / numberOfLinesInFile) * 100;
+                // var consoleString =
+                //     $"Connected points {i} of {numberOfLinesInFile}. {percentageDone:N2}% done";
+                // // Move the console cursor to the start and replace the line
+                // Console.Write("\r{0}", consoleString);
             }
             stopwatch.Stop();
             Console.WriteLine($"\nCount after: {count}");

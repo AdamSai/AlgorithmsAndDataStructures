@@ -122,11 +122,11 @@ namespace UnionFind
                 Union(p, q);
 
 
-                var percentageDone = ((float) i / numberOfLinesInFile) * 100;
-                var consoleString =
-                    $"Connected points {i} of {numberOfLinesInFile}. {percentageDone:N2}% done";
-                // Move the console cursor to the start and replace the line
-                Console.Write("\r{0}", consoleString);
+                // var percentageDone = ((float) i / numberOfLinesInFile) * 100;
+                // var consoleString =
+                //     $"Connected points {i} of {numberOfLinesInFile}. {percentageDone:N2}% done";
+                // // Move the console cursor to the start and replace the line
+                // Console.Write("\r{0}", consoleString);
             }
             stopwatch.Stop();
             Console.WriteLine($"\nCount after: {count}");
