@@ -1,10 +1,10 @@
 using System;
 
-namespace ClassExercises
+namespace ClassExercises.PriorityQueues
 {
-    public interface IPriorityQueue<T> where T: IComparable<T>, ISelection<T>
+    public interface IPriorityQueue<T>: ISelection<T> where T: IComparable<T>
     {
-        void Enqueue();
+        void Enqueue(T item);
         T Dequeue();
         T Peek();
     }

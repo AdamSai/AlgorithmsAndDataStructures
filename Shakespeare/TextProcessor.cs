@@ -26,7 +26,7 @@ namespace Shakespeare
         private string[] SanitizeText(string text, string pattern)
         {
             var matches = Regex.Matches(text, pattern);
-            var matchedStrings = new string[matches.Count()];
+            var matchedStrings = new string[matches.Count];
             for (var i = 0; i < matches.Count(); i++)
             {
                 matchedStrings[i] = matches[i].ToString();

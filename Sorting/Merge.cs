@@ -46,17 +46,17 @@ namespace Sorting
         private static void MergeArray(IComparable[] a, in int lo, in int mid, in int hi)
         {
             int i = lo, j = mid + 1;
-            for (var k = lo; k <= hi; k++)
+            for (var k = lo; k <= hi; k++) // Copy array to aux array
             {
                 aux[k] = a[k];
             }
 
             for (var k = lo; k <= hi; k++)
             {
-                if (i > mid) a[k] = aux[j++];
-                else if (j > hi) a[k] = aux[i++];
-                else if (Less(aux[j], aux[i])) a[k] = aux[j++];
-                else a[k] = a[i++];
+                if (i > mid) a[k] = aux[j++]; // If left half is exhausted take from the right
+                else if (j > hi) a[k] = aux[i++]; // if right half is exhausted take from the left
+                else if (Less(aux[j], aux[i])) a[k] = aux[j++]; // current key on the right less than current key on the left, take from right
+                else a[k] = a[i++]; // current key on the right >= current key on the left, take from the left
             }
         }
 

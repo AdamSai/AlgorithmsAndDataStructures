@@ -17,7 +17,7 @@ namespace Sorting
             }
 
             stopWatch.Stop();
-            TrieNode.printTrie(root);
+            TrieNode.PrintTrie(root);
             Console.WriteLine($"Inserted all {str.Length} elements in {stopWatch.ElapsedMilliseconds}ms");
         }
 
@@ -56,7 +56,7 @@ namespace Sorting
                 node._value = value;
             }
 
-            public static void printTrie(TrieNode node)
+            public static void PrintTrie(TrieNode node)
             {
                 if (node == null) return;
                 if (!string.IsNullOrEmpty(node._value))
@@ -64,7 +64,7 @@ namespace Sorting
                 // here you can play with the order of the children
                 foreach (var child in node.children)
                 {
-                        printTrie(child);
+                        PrintTrie(child);
                 }
             }
 
@@ -75,9 +75,9 @@ namespace Sorting
                 // Default return value is char - 97
                 return c switch
                 {
-                    '-' => 26,
-                    '\'' => 27,
-                    _ => c - 97
+                    '-' => 0,
+                    '\'' => 1,
+                    _ => c - 95
                 };
             }
         }
