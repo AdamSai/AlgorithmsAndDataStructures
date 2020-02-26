@@ -16,12 +16,13 @@ namespace ClassExercises
             {
                 charQueue.Enqueue(c);
             }
+
             Console.Write("Char queue contents: ");
             while (!charQueue.IsEmpty())
             {
                 Console.Write(charQueue.Dequeue() + " ");
             }
-            
+
             Console.WriteLine();
             Console.Write("Int queue contents: ");
 
@@ -29,11 +30,11 @@ namespace ClassExercises
             {
                 intQueue.Enqueue(i);
             }
+
             while (!intQueue.IsEmpty())
             {
                 Console.Write(intQueue.Dequeue() + " ");
             }
-
         }
     }
 }

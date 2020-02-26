@@ -4,10 +4,11 @@ using System.Collections.Generic;
 
 namespace ClassExercises.PriorityQueues
 {
-    public class LinkedPriorityQueue<T> :  IPriorityQueue<T> where T : IComparable<T>
+    public class LinkedPriorityQueue<T> : IPriorityQueue<T> where T : IComparable<T>
     {
         private Node<T> root;
         private int size;
+
         public LinkedPriorityQueue()
         {
             size = 0;
@@ -15,33 +16,32 @@ namespace ClassExercises.PriorityQueues
 
         public void Enqueue(T data)
         {
-            if(size == 0)
+            if (size == 0)
             {
-
                 size++;
                 root = new Node<T>(data, null);
             }
             else
             {
                 var currentNode = root;
-                for (var i = 0; i <= size; i++)
+                for (var i = 0; i < size; i++)
                 {
-                    if (i == 0)
+                    // If the new data is less than the first element's
+                    if (i == 0 && Less(data, currentNode.Value))
                     {
-                        if (Less(data, currentNode.Value))
-                        {
-                            var temp = currentNode;
-                            root = new Node<T>(data, temp);
-                            size++;
-                            return;
-                        }
+                        var temp = currentNode;
+                        root = new Node<T>(data, temp);
+                        size++;
+                        return;
                     }
-                    if (currentNode.Next == null)
+                    // If we've reached the end of the queue
+                    if (i == size - 1)
                     {
                         currentNode.Next = new Node<T>(data, null);
                         size++;
                         return;
                     }
+                    // If the current data is less than the next values data, insert the new data before the next data.
                     if (Less(data, currentNode.Next.Value))
                     {
                         var temp = currentNode.Next;
@@ -49,6 +49,7 @@ namespace ClassExercises.PriorityQueues
                         size++;
                         return;
                     }
+
                     currentNode = currentNode.Next;
                 }
             }
@@ -56,7 +57,7 @@ namespace ClassExercises.PriorityQueues
 
         public T Dequeue()
         {
-            if(IsEmpty()) throw new IndexOutOfRangeException("Queue is empty");
+            if (IsEmpty()) throw new IndexOutOfRangeException("Queue is empty");
             var nodeToReturn = root;
             root = root.Next;
             size--;
@@ -71,7 +72,6 @@ namespace ClassExercises.PriorityQueues
 
         private static bool Less(T a, T b)
         {
-
             return a.CompareTo(b) < 0;
         }
 
@@ -83,6 +83,7 @@ namespace ClassExercises.PriorityQueues
                 yield return current.Value;
                 current = current.Next;
             }
+
             // return new NodeIterator<T>(root);
         }
 
