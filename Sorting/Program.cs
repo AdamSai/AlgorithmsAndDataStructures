@@ -47,17 +47,21 @@ namespace Sorting
                 Console.Write($"{item.ToString()} ");
             }
 
-            Console.Write("\n\nSorting using lambda: ");
-            arrSorter.Sort((x, y) => x.CompareTo(y) < 0);
-            foreach (var item in arrSorter.Queue)
-            {
-                Console.Write($"{item.ToString()} ");
-            }
+//            Console.Write("\n\nSorting using lambda: ");
+//            arrSorter.Sort((x, y) => x.CompareTo(y) < 0);
+//            foreach (var item in arrSorter.Queue)
+//            {
+//                Console.Write($"{item.ToString()} ");
+//            }
 
             Console.Write("\n\nRemoving all elements: ");
             while (arrSorter.HeapSize > 0)
             {
-                Console.Write($"{arrSorter.Dequeue().ToString()}, ");
+                Console.Write($"\n Removing: {arrSorter.Dequeue().ToString()} \n New Array: ");
+                foreach (var item in arrSorter.Queue)
+                {
+                    Console.Write(item.ToString() + " ");
+                }
             }
 
             arrSorter.Enqueue(54);
