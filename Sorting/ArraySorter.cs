@@ -183,7 +183,7 @@ namespace Sorting
             if (HeapSize == MaxHeapSize) throw new Exception("Queue is full!");
             Queue[_nextIn++] = item;
             HeapSize++;
-            HeapifyQueue(MinHeapify);
+            HeapifyQueue(MaxHeapify);
         }
 
         /// <summary>
