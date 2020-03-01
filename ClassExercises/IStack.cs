@@ -2,7 +2,7 @@ namespace ClassExercises
 {
     public interface IStack<T> : ISelection<T>
     {
-        public void Push(T item);
-        public T Pop();
+         void Push(T item);
+         T Pop();
     }
 }
