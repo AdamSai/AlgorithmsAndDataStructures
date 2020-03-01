@@ -25,61 +25,44 @@ namespace Sorting
             // var multiplier = t2 / t1;
             // Console.WriteLine($"For {N} random Doubles\n{alg1} is");
             // Console.WriteLine($"{multiplier:N1} times faster than {alg2}\n");
+
             var input = new[]
             {
                 10, 14, 19, 26, 31, 42, 27, 44, 35, 33
             };
             var arrSorter = new ArraySorter<int>(input, 20);
-            arrSorter.SortAscending();
 
-            Console.Write("Ascending: ");
-            foreach (var item in arrSorter.Queue)
-            {
-                Console.Write(item + " ");
-            }
-
+            Console.Write("Sorting descending: ");
             arrSorter.SortDescending();
-            Console.Write("\nDescending: ");
             foreach (var item in arrSorter.Queue)
             {
-                Console.Write(item + " ");
+                Console.Write($"{item.ToString()} ");
             }
 
-            arrSorter.Enqueue(25);
-            arrSorter.Enqueue(50);
-            arrSorter.Enqueue(13);
-            arrSorter.Enqueue(18);
-            arrSorter.Enqueue(80);
-            Console.Write("\n============After Insert ===========");
-            Console.Write("\nAfter insert min heapify: ");
-            foreach (var item in arrSorter.Queue)
-            {
-                Console.Write(item + " ");
-            }
 
+            Console.Write(("\n\nSorting ascending: "));
             arrSorter.SortAscending();
-            Console.Write("\nAscending: ");
-
             foreach (var item in arrSorter.Queue)
             {
-                Console.Write(item + " ");
+                Console.Write($"{item.ToString()} ");
             }
 
-            arrSorter.SortDescending();
-            Console.Write("\nDescending: ");
+            Console.Write("\n\nSorting using lambda: ");
+            arrSorter.Sort((x, y) => x.CompareTo(y) < 0);
             foreach (var item in arrSorter.Queue)
             {
-                Console.Write(item + " ");
+                Console.Write($"{item.ToString()} ");
             }
 
-            Console.WriteLine("\nDequeued " + arrSorter.Dequeue());
-            Console.Write("After dequeue: ");
-            foreach (var item in arrSorter.Queue)
+            Console.Write("\n\nRemoving all elements: ");
+            while (arrSorter.HeapSize > 0)
             {
-                Console.Write(item + " ");
+                Console.Write($"{arrSorter.Dequeue().ToString()}, ");
             }
 
-            Console.WriteLine("\nDequeued " + arrSorter.Dequeue());
+            arrSorter.Enqueue(54);
+            Console.WriteLine("Inserting 54");
+            Console.WriteLine($"Dequeuing {arrSorter.Dequeue().ToString()}");
         }
     }
 }
