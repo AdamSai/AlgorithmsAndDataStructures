@@ -26,102 +26,19 @@
 
             public void SortAscending()
             {
-                HandleSort(MaxHeapify);
+                _isSortedAscending = true;
+                Sort((x, y) => x.CompareTo(y) > 0);
             }
 
             public void SortDescending()
             {
-                HandleSort(MinHeapify);
-            }
-
-            /// <summary>
-            /// Input the appropriate heapify method (MinHeapify or MaxHeapify and heapify the list according to the select heap method)
-            /// </summary>
-            /// <param name="heapFunction">MinHeapify or MaxHeapify</param>
-            private void HandleSort(Action<T[], int, int> heapFunction)
-            {
-                var length = HeapSize;
-                // Build the heap
-                HeapifyQueue(heapFunction);
-
-                // Extract element from array one by one
-                for (var i = length - 1; i >= 0; i--)
-                {
-                    // Move current root to end 
-                    Exchange(Queue, 0, i);
-                    // call min heapify on the reduced heap 
-                    heapFunction(Queue, i, 0);
-                }
-            }
-
-            /// <summary>
-            /// Heapifies the entire queue
-            /// </summary>
-            /// <param name="heapMethod">The heapify method to use. MaxHeapify or MinHeapify</param>
-            private void HeapifyQueue(Action<T[], int, int> heapMethod)
-            {
-                // Go to the last heap in the tree and start heapifying
-                for (var i = HeapSize / 2 - 1; i >= 0; i--)
-                {
-                    heapMethod(Queue, HeapSize, i);
-                }
-            }
-
-            /// <summary>
-            /// Max heapify an array
-            /// </summary>
-            /// <param name="arr">Array to be heapified</param>
-            /// <param name="size">Size of heap</param>
-            /// <param name="i">Current index</param>
-            private void MaxHeapify(T[] arr, int size, int i)
-            {
-                _isSortedAscending = true;
-                
-                var largest = i;
-                var left = i * 2 + 1;
-                var right = i * 2 + 2;
-
-                // Check if left child is larger than root
-                if (left < size && !Less(arr[left], arr[largest])) largest = left;
-
-                // Check if right child is larger than root
-                if (right < size && !Less(arr[right], arr[largest])) largest = right;
-
-                if (largest != i)
-                {
-                    Exchange(arr, i, largest);
-                    MaxHeapify(arr, size, largest);
-                }
-            }
-
-            /// <summary>
-            /// Creates a min heap
-            /// </summary>
-            /// <param name="arr">array to be heapified</param>
-            /// <param name="size">size of heap</param>
-            /// <param name="i">current index</param>
-            private void MinHeapify(T[] arr, int size, int i)
-            {
                 _isSortedAscending = false;
-                var smallest = i;
-                var left = i * 2 + 1;
-                var right = i * 2 + 2;
-
-                // Check if left child is smaller than root
-                if (left < size && Less(arr[left], arr[smallest])) smallest = left;
-
-                // Check if right child is smaller than root
-                if (right < size && Less(arr[right], arr[smallest])) smallest = right;
-
-                if (smallest != i)
-                {
-                    Exchange(arr, i, smallest);
-                    MinHeapify(arr, size, smallest);
-                }
+                Sort((x,y) => x.CompareTo(y) < 0);
             }
+            
 
             /// <summary>
-            /// Heapsort using a lambda expression. Example: arraySorter.Sort((x,y) => x.compareTo(y) > 0);
+            /// Heapsort using a lambda expression. Example: arraySorter.Sort((x,y) => x.compareTo(y) > 0); for an ascending sort
             /// </summary>
             /// <param name="lambda">A lambda expression with 2 types T and should return a bool</param>
             public void Sort(Func<T, T, bool> lambda)
@@ -130,7 +47,7 @@
                 //Move to last heap in the tree and start hapifying
                 for (var i = length / 2 - 1; i >= 0; i--)
                 {
-                    LambdaHeapify(Queue, length, i, lambda);
+                    Heapify(Queue, length, i, lambda);
                 }
 
                 for (var i = length - 1; i >= 0; i--)
@@ -139,7 +56,7 @@
                     Exchange(Queue, 0, i);
 
                     // call min heapify on the reduced heap 
-                    LambdaHeapify(Queue, i, 0, lambda);
+                    Heapify(Queue, i, 0, lambda);
                 }
             }
 
@@ -151,18 +68,19 @@
             /// <param name="size">Size of heap</param>
             /// <param name="i">Current index</param>
             /// <param name="lambda">Lambda expression to compare children</param>
-            private void LambdaHeapify(T[] arr, int size, int i, Func<T, T, bool> lambda)
+            private void Heapify(T[] arr, int size, int i, Func<T, T, bool> lambda)
             {
-                var smallest = i;
-                var left = i * 2 + 1;
-                var right = i * 2 + 2;
+                
+                var parent = i;
+                var leftChild = i * 2 + 1;
+                var rightChild = i * 2 + 2;
 
-                if (left < size && lambda(arr[left], arr[smallest])) smallest = left;
-                if (right < size && lambda(arr[right], arr[smallest])) smallest = right;
-                if (smallest != i)
+                if (leftChild < size && lambda(arr[leftChild], arr[parent])) parent = leftChild;
+                if (rightChild < size && lambda(arr[rightChild], arr[parent])) parent = rightChild;
+                if (parent != i)
                 {
-                    Exchange(arr, i, smallest);
-                    LambdaHeapify(arr, size, smallest, lambda);
+                    Exchange(arr, i, parent);
+                    Heapify(arr, size, parent, lambda);
                 }
             }
 
@@ -179,10 +97,10 @@
                 HeapSize++;
 
                 if(_isSortedAscending)
-                    HandleSort(MaxHeapify);
+                    SortAscending();
                 else
                 {
-                    HandleSort(MinHeapify);
+                    SortDescending();
                 }
             }
 
@@ -201,10 +119,10 @@
                 Queue[HeapSize] = default;
 
                 if(_isSortedAscending)
-                    HandleSort(MaxHeapify);
+                    SortAscending();
                 else
                 {
-                    HandleSort(MinHeapify);
+                    SortDescending();
                 }
                 _nextIn--;
                 return returnValue;
@@ -221,20 +139,6 @@
                 var temp = arr[firstIndex];
                 arr[firstIndex] = arr[secondIndex];
                 arr[secondIndex] = temp;
-            }
-
-
-            /// <summary>
-            /// Returns true if a is smaller than b
-            /// </summary>
-            /// <param name="a"></param>
-            /// <param name="b"></param>
-            /// <returns></returns>
-            private bool Less(T a, T b)
-            {
-                IComparable aComparable = (IComparable) a;
-                IComparable bComparable = (IComparable) b;
-                return aComparable.CompareTo(bComparable) < 0;
             }
         }
     }
