@@ -44,19 +44,25 @@
             public void Sort(Func<T, T, bool> lambda)
             {
                 var length = HeapSize;
-                //Move to last heap in the tree and start hapifying
-                for (var i = length / 2 - 1; i >= 0; i--)
-                {
-                    Heapify(Queue, length, i, lambda);
-                }
+                // Move to last heap in the tree and start heapifying
+                BuildHeap(lambda);
 
                 for (var i = length - 1; i >= 0; i--)
                 {
                     // Move current root to end 
                     Exchange(Queue, 0, i);
 
-                    // call min heapify on the reduced heap 
+                    // call heapify on the reduced heap 
                     Heapify(Queue, i, 0, lambda);
+                }
+            }
+
+            private void BuildHeap(Func<T, T, bool> lambda)
+            {
+                var length = HeapSize;
+                for (var i = length / 2 - 1; i >= 0; i--)
+                {
+                    Heapify(Queue, length, i, lambda);
                 }
             }
 
@@ -96,11 +102,11 @@
                 Queue[_nextIn++] = item;
                 HeapSize++;
 
-                if(_isSortedAscending)
-                    SortAscending();
+                if (_isSortedAscending)
+                    BuildHeap((x, y) => x.CompareTo(y) < 0);
                 else
                 {
-                    SortDescending();
+                    BuildHeap((x, y) => x.CompareTo(y) > 0);
                 }
             }
 
@@ -119,10 +125,10 @@
                 Queue[HeapSize] = default;
 
                 if(_isSortedAscending)
-                    SortAscending();
+                    BuildHeap((x, y) => x.CompareTo(y) < 0);
                 else
                 {
-                    SortDescending();
+                    BuildHeap((x, y) => x.CompareTo(y) > 0);
                 }
                 _nextIn--;
                 return returnValue;
